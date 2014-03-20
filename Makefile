@@ -10,4 +10,4 @@ release:
 	@make clean
 	@make build
 
-.PHONY: build
+.PHONY: build clean release
