@@ -2,10 +2,10 @@ FORMAT: 1A
 HOST: http://api.countmein.io
 
 # countmein.io
-Notes API is a *short texts saving* service similar to its physical paper presence on your table.
+countmein API
 
-# Group Notes
-Notes related resources of the **Notes API**
+# Group Events
+Events related resources of the **countmein API**
 
 ## Events Collection [/event]
 ### List all Notes [GET]
@@ -41,3 +41,12 @@ A single Event object with all its details
 
 ### Remove a Note [DELETE]
 + Response 204
+
+## Total Number of Events [/eventcount]
+
+### Retrieves the total number of events [GET]
++ Response 200 (application/json)
+
+    + Body
+    
+            { "total": 46000000000 }
