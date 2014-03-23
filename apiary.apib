@@ -1,47 +1,52 @@
 FORMAT: 1A
-HOST: http://countmein.io/api
+HOST: http://api.countmein.io
 
 # countmein.io
-Notes API is a *short texts saving* service similar to its physical paper presence on your table.
+countmein API
 
-# Group Notes
-Notes related resources of the **Notes API**
+# Group Events
+Events related resources of the **countmein API**
 
-## Notes Collection [/notes]
+## Events Collection [/event]
 ### List all Notes [GET]
 + Response 200 (application/json)
 
         [{
-          "id": 1, "title": "Jogging in park"
+          "id": 1, "name": "Tuesday Futsal"
         }, {
-          "id": 2, "title": "Pick-up posters from post-office"
+          "id": 2, "name": "Thursday Futsal"
         }]
 
-### Create a Note [POST]
+### Create an Event [POST]
 + Request (application/json)
 
-        { "title": "Buy cheese and bread for breakfast." }
+        { "name": "Tuesday Futsal" }
 
 + Response 201 (application/json)
 
-        { "id": 3, "title": "Buy cheese and bread for breakfast." }
+        { "id": 3, "name": "Tuesday Futsal" }
 
-## Note [/notes/{id}]
-A single Note object with all its details
+## Event [/event/{id}]
+A single Event object with all its details
 
 + Parameters
     + id (required, number, `1`) ... Numeric `id` of the Note to perform action with. Has example value.
 
-### Retrieve a Note [GET]
+### Retrieve a Event [GET]
 + Response 200 (application/json)
-
-    + Header
-
-            X-My-Header: The Value
 
     + Body
 
-            { "id": 2, "title": "Pick-up posters from post-office" }
+            { "id": 2, "name": "Thursday Futsal" }
 
 ### Remove a Note [DELETE]
 + Response 204
+
+## Total Number of Events [/eventcount]
+
+### Retrieves the total number of events [GET]
++ Response 200 (application/json)
+
+    + Body
+    
+            { "total": 46000000000 }
