@@ -19,25 +19,23 @@ module.exports = cmi.class.base.extend(function () {
 		this.model.on('destroy', cb('destroy'));
 	},
 
+	predestroy: function () {},
 	preget: function () {},
+	presave: function () {},
+
+	collection: function () {
+		cmi.helpers.scope.apply();
+	},
+
+	destroy: function () {
+		cmi.helpers.scope.apply();
+	},
 
 	get: function () {
 		cmi.helpers.scope.apply();
 	},
 
-	presave: function () {
-		// cmi.scope.loading = true;
-	},
-
 	save: function () {
-		cmi.helpers.scope.apply();
-	},
-
-	predestroy: function () {
-		// cmi.scope.loading = true;
-	},
-
-	destroy: function () {
 		cmi.helpers.scope.apply();
 	}
 
