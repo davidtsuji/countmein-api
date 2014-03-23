@@ -1,22 +1,43 @@
-var modules = require( '../modules' );
+var cmi = require('../cmi');
 
-exports = module.exports = function () {
-  return new exports.Service();
-};
+module.exports = cmi.class.service.extend(function () {}).methods({
 
-exports.Service = modules.classes.service.extend( function () {
-  console.log( 'mainService constructor' )
+	init: function () {
+		var self = this;
 
-} ).methods( {
+		self.data.eventcount = new cmi.model.eventcount().model;
+		self.data.event = new cmi.model.event().model;
 
-  init: function () {
-    console.log( 'mainService class init' );
-  },
+		async.waterfall([
 
-  data: {
-    item: {},
-    items: [],
-    new: {}
-  }
+			function (_callback) {
+				self.data.eventcount.get(function (_error) {
+					_callback(_error);
+				});
+			}
 
-} );
+		], function (_error) {
+			self.initialised = true;
+		});
+
+	},
+
+	eventCreate: function () {
+		var self = this;
+
+		self.data.event.hash = cmi.helpers.uid();
+		self.data.event.createdAt = new Date();
+
+		if (!self.data.event.isValid()) {
+			return alert('invalid data. (TODO: make validation pretty)');
+		}
+
+		self.data.event.save(function (_error, _res) {
+			location.href = '/event/' + self.data.event.hash;
+		});
+
+	},
+
+	data: {}
+
+});

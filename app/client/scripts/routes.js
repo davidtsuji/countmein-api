@@ -1,31 +1,31 @@
-var controller = function ( _service ) {
-  return function () {
-    var myApp = window.myApp,
-      module = myApp.scope.module = myApp.scope[ _service ];
+var cmi = require('./cmi');
 
-    module.name = _service;
-    module.scope = myApp.scope;
-    module.init();
+var controller = function (_service) {
+	return function () {
+		var module = cmi.module = cmi.scope.module = cmi.scope[_service];
 
-  };
+		module.name = _service;
+		module.initialised = false;
+		module.scope = cmi.scope;
+		module.init();
+
+	};
 };
 
-var routes = function ( $routeProvider, $locationProvider ) {
+module.exports = function ($routeProvider, $locationProvider) {
 
-  $routeProvider
+	$routeProvider
 
-  .when( '/person/:id', {
-    templateUrl: '/partials/person.html',
-    controller: controller( 'personService' )
-  } )
+	.when('/event/:hash', {
+		templateUrl: '/partials/event.html',
+		controller: controller('eventService')
+	})
 
-  .otherwise( {
-    templateUrl: 'partials/main.html',
-    controller: controller( 'mainService' )
-  } );
+	.otherwise({
+		templateUrl: 'partials/main.html',
+		controller: controller('mainService')
+	});
 
-  $locationProvider.html5Mode( true );
+	$locationProvider.html5Mode(true);
 
 };
-
-module.exports = routes;

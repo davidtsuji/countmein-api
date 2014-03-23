@@ -1,3 +1,34 @@
-<h1>Main</h1>
+<section>
+	<form ng-submit="module.eventCreate()" ng-disabled="module.data.event.busy">
+		<fieldset>
 
-<div ng-include="'/partials/nav.html'"></div>
+			<legend>Create a new event</legend>
+
+			<div class="form-group">
+				<input type="text" ng-model="module.data.event.name" placeholder="Event Name" autofocus>
+			</div>
+
+			<div class="form-group">
+				<input type="text" ng-model="module.data.event.when" placeholder="Event Date">
+			</div>
+
+			<div class="form-group">
+				<input type="text" ng-model="module.data.event.where" placeholder="Event Location">
+			</div>
+
+			<button ng-disabled="module.data.event.busy">create</button>
+
+		</fieldset>
+	</form>
+</section>
+
+<section>
+	<h3>Your recent events</h3>
+	<ul>
+		<li>... load recent events here</li>
+	</ul>
+</section>
+
+<footer ng-show="module.data.eventcount.total > 0">
+	{{module.data.eventcount.total}} events created and counting
+</footer>

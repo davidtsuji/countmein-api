@@ -19,7 +19,7 @@ gulp.task('styles', function () {
 			paths: [path.join(__dirname, 'less', 'includes')]
 		}))
 		.pipe(gulp.dest('./public/styles'))
-		.pipe(livereload())
+		.pipe(livereload());
 });
 
 gulp.task('scriptsApp', function () {
@@ -30,7 +30,7 @@ gulp.task('scriptsApp', function () {
 		}))
 		.pipe(rename('app.js'))
 		.pipe(gulp.dest('./public/scripts'))
-		.pipe(livereload())
+		.pipe(livereload());
 });
 
 gulp.task('scriptsLib', function () {
@@ -44,7 +44,7 @@ gulp.task('scriptsLib', function () {
 	])
 		.pipe(concat('libs.js'))
 		.pipe(gulp.dest('./public/scripts'))
-		.pipe(livereload())
+		.pipe(livereload());
 });
 
 gulp.task('markup', function () {

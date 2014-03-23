@@ -1,12 +1,5 @@
-var modules = require( '../modules' );
+var cmi = require('../cmi');
 
-module.exports = modules.klass( function () {
-  console.log( 'service.class constructor' );
+module.exports = cmi.class.base.extend(function () {
 
-} ).methods( {
-
-  init: function () {
-    console.log( 'Service Class Init' );
-  }
-
-} );
+});
