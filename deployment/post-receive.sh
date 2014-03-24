@@ -11,6 +11,7 @@ GIT_WORK_TREE=$DIR git checkout -f
  
 cd $DIR
 npm install
+make
 echo "Done installs"
  
 if [ -d /var/www/current ]; then
