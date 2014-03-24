@@ -25,7 +25,6 @@ module.exports = cmi.class.service.extend(function () {}).methods({
 	eventCreate: function () {
 		var self = this;
 
-		self.data.event.hash = cmi.helpers.uid();
 		self.data.event.createdAt = new Date();
 
 		if (!self.data.event.isValid()) {
