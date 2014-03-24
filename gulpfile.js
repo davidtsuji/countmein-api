@@ -18,6 +18,7 @@ gulp.task('styles', function () {
 		.pipe(less({
 			paths: [path.join(__dirname, 'less', 'includes')]
 		}))
+		.pipe(rename('app.css'))
 		.pipe(gulp.dest('./public/styles'))
 		.pipe(livereload());
 });
