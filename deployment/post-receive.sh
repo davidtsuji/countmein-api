@@ -10,7 +10,6 @@ echo "Checking out to $DIR"
 GIT_WORK_TREE=$DIR git checkout -f
  
 cd $DIR
-cd www
 npm install
 echo "Done installs"
  
@@ -47,13 +46,6 @@ if ! does_upstart_service_exist node-www
 then
         echo "Starting node-www"
         sudo start node-www
-fi
-
-# No need to restart the blog if its already running since it doesnt automatically get updated.
-if ! does_upstart_service_exist node-blog
-then
-        echo "Starting node-blog"
-        sudo start node-blog
 fi
 
 echo "Done"
