@@ -10,8 +10,7 @@ var gulp = require('gulp'),
 	shell = require('gulp-shell'),
 	path = require('path');
 
-var liveReloadServer = livereload(),
-	worker;
+var worker;
 
 gulp.task('styles', function () {
 	gulp.src('./app/client/styles/index.less')
@@ -20,7 +19,7 @@ gulp.task('styles', function () {
 		}))
 		.pipe(rename('app.css'))
 		.pipe(gulp.dest('./public/styles'))
-		.pipe(livereload());
+		// .pipe(livereload());
 });
 
 gulp.task('scriptsApp', function () {
@@ -31,7 +30,7 @@ gulp.task('scriptsApp', function () {
 		}))
 		.pipe(rename('app.js'))
 		.pipe(gulp.dest('./public/scripts'))
-		.pipe(livereload());
+		// .pipe(livereload());
 });
 
 gulp.task('scriptsLib', function () {
@@ -46,13 +45,13 @@ gulp.task('scriptsLib', function () {
 	])
 		.pipe(concat('libs.js'))
 		.pipe(gulp.dest('./public/scripts'))
-		.pipe(livereload());
+		// .pipe(livereload());
 });
 
 gulp.task('markup', function () {
 	gulp.src(['./app/client/markup/**/*.*'])
 		.pipe(gulp.dest('./public/'))
-		.pipe(livereload());
+		// .pipe(livereload());
 
 });
 
@@ -105,6 +104,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', ['build', 'minify', 'test']);
+gulp.task('notests', ['build', 'minify']);
 gulp.task('scripts', ['scriptsApp', 'scriptsLib']);
 gulp.task('build', ['styles', 'scripts', 'markup']);
 gulp.task('run', ['build', 'server', 'watch']);
