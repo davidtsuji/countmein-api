@@ -77,7 +77,7 @@ sudo chown git:www-data /opt/git/countmein.git/hooks/post-receive
 
 
 # Setup upstart to keep node running after reboots
-cat /tmp/countmein.io/deployment/upstart.conf node-www.conf
+cp /tmp/countmein.io/deployment/upstart.conf node-www.conf
 
 
 chmod 777 node-www.conf
