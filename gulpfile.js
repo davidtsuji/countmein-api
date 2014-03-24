@@ -24,7 +24,7 @@ gulp.task('styles', function () {
 });
 
 gulp.task('scriptsApp', function () {
-	gulp.src(['./app/client/scripts/index.js'])
+	return gulp.src(['./app/client/scripts/index.js'])
 		.pipe(browserify({
 			standalone: 'cmi',
 			debug: true
@@ -35,7 +35,7 @@ gulp.task('scriptsApp', function () {
 });
 
 gulp.task('scriptsLib', function () {
-	gulp.src([
+	return gulp.src([
 		'./bower_components/jquery/dist/jquery.js',
 		'./bower_components/angular/angular.js',
 		'./bower_components/angular-route/angular-route.js',
@@ -56,21 +56,21 @@ gulp.task('markup', function () {
 
 });
 
-gulp.task('minifyAppScripts', function () {
-	gulp.src(['./public/scripts/app.js'])
+gulp.task('minifyAppScripts', ['scriptsApp'], function () {
+	return gulp.src(['./public/scripts/app.js'])
 		.pipe(compress())
 		.pipe(rename('app.min.js'))
 		.pipe(gulp.dest('./public/scripts'));
 });
 
-gulp.task('minifyLibsScripts', function () {
-	gulp.src('./public/scripts/libs.js')
+gulp.task('minifyLibsScripts', ['scriptsLib'], function () {
+	return gulp.src('./public/scripts/libs.js')
 		.pipe(compress())
 		.pipe(rename('libs.min.js'))
 		.pipe(gulp.dest('./public/scripts'));
 });
 
-gulp.task('test', function () {
+gulp.task('test', ['minify'], function () {
 	gulp.src('')
 		.pipe(shell([
 			'npm test'
