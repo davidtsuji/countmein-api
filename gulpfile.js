@@ -41,6 +41,7 @@ gulp.task('scriptsLib', function () {
 		'./bower_components/angular-route/angular-route.js',
 		'./bower_components/async/lib/async.js',
 		'./bower_components/moment/moment.js',
+		'./bower_components/numeral/numeral.js',
 		'./bower_components/underscore/underscore.js'
 	])
 		.pipe(concat('libs.js'))

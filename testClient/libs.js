@@ -12,6 +12,8 @@ describe('Libs', function () {
 	}, {
 		name: 'moment'
 	}, {
+		name: 'numeral'
+	}, {
 		name: 'underscore',
 		eval: '_'
 	}];
