@@ -9,6 +9,13 @@
     "start": "node server.js"
   },
   "author": "David Tsuji",
+  "contributors": [
+    {
+      "name" : "Glen Arrowsmith", 
+      "email" : "glen.arrowsmith@gmail.com", 
+      "url" : "http://garrows.com/"
+    }
+  ],
   "license": "MIT",
   "devDependencies": {
     "browserify": "^3.32.1",
