@@ -24,3 +24,4 @@ cmi.service.event = require('./services/event.service');
 cmi.model = {};
 cmi.model.event = require('./models/event.model');
 cmi.model.eventcount = require('./models/eventcount.model');
+cmi.model.guest = require('./models/guest.model');
