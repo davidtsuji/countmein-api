@@ -48,12 +48,5 @@ then
         sudo start node-www
 fi
 
-# No need to restart the blog if its already running since it doesnt automatically get updated.
-if ! does_upstart_service_exist node-blog
-then
-        echo "Starting node-blog"
-        sudo start node-blog
-fi
-
 echo "Done"
 
