@@ -10,7 +10,6 @@ echo "Checking out to $DIR"
 GIT_WORK_TREE=$DIR git checkout -f
  
 cd $DIR
-cd www
 npm install
 echo "Done installs"
  
