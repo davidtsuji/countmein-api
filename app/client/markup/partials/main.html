@@ -1,34 +1,43 @@
-<section>
-	<form ng-submit="module.eventCreate()" ng-disabled="module.data.event.busy">
+<div class="container">
+
+	<form name="event" ng-submit="module.eventCreate()" ng-disabled="module.data.event.busy">
 		<fieldset>
 
 			<legend>Create a new event</legend>
 
 			<div class="form-group">
-				<input type="text" ng-model="module.data.event.name" placeholder="Event Name" autofocus>
+				<input name="name" type="text" class="form-control" ng-model="module.data.event.name" placeholder="Name" autofocus required>
+				<aside ng-show="event.name.$invalid && event.$dirty">needed</aside>
 			</div>
 
-			<div class="form-group">
-				<input type="text" ng-model="module.data.event.when" placeholder="Event Date">
+			<div ng-show="module.showMoreEventOptions">
+
+				<div class="form-group">
+					<input type="text" class="form-control" ng-model="module.data.event.date" placeholder="Date">
+				</div>
+
+				<div class="form-group">
+					<input type="text" class="form-control" ng-model="module.data.event.time" placeholder="Time">
+				</div>
+
+				<div class="form-group">
+					<input type="text" class="form-control" ng-model="module.data.event.where" placeholder="Location">
+				</div>
+
 			</div>
 
-			<div class="form-group">
-				<input type="text" ng-model="module.data.event.where" placeholder="Event Location">
-			</div>
-
-			<button ng-disabled="module.data.event.busy">create</button>
+			<button class="btn btn-primary btn-lg btn-block" ng-disabled="module.data.event.busy">create</button>
 
 		</fieldset>
 	</form>
-</section>
 
-<section>
-	<h3>Your recent events</h3>
-	<ul>
-		<li>... load recent events here</li>
-	</ul>
-</section>
+	<div class="container hide">
+		<h3>Your recent events</h3>
+		<ul>
+			<li>... load recent events here</li>
+		</ul>
+	</div>
 
-<footer ng-show="module.data.eventcount.total > 0">
-	{{module.data.eventcount.total}} events created and counting
-</footer>
+	<footer ng-include="'/partials/includes/eventcount.html'"></footer>
+
+</div>

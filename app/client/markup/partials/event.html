@@ -1,69 +1,96 @@
-<div ng-include="'/partials/nav.html'"></div>
+<div class="container">
 
-<div>
-	<h1>
-		{{module.data.event.name}}
-		<small ng-show="module.data.event.organiserName" ng-bind="module.data.event.organiserName"></small>
-	</h1>
-	<aside>
-		<div>
-			<span ng-show="module.data.event.date">on the {{module.data.event.date}}</span>
-			<span ng-show="module.data.event.time">at {{module.data.event.time}}</span>
-		</div>
-		<div>
-			<span ng-show="module.data.event.where" ng-bind="module.data.event.where"></span>
-		</div>
-	</aside>
-</div>
+	<header class="section text-center">
+		<h1>
+			<span>
+				{{module.data.event.name}}
+				<small ng-show="module.data.event.organiserName">by {{module.data.event.organiserName}}</small>
+			</span>
+		</h1>
+		<aside>
+			<div>
+				<span ng-show="module.data.event.date">on the {{module.data.event.date}}</span>
+				<span ng-show="module.data.event.time">at {{module.data.event.time}}</span>
+			</div>
+			<div>
+				<span ng-show="module.data.event.where" ng-bind="module.data.event.where"></span>
+			</div>
+		</aside>
+	</header>
 
-<div>
-	<form ng-submit="module.guestAdd()">
-		<fieldset>
-			<input type="text" ng-model="module.data.new.guest.name">
-			<button>add</button>
-		</fieldset>
-	</form>
-</div>
-
-<div>
-	<div>
-		<header>People who are in</header>
-		<ul>
-			<li ng-repeat="guest in module.data.event.guests | filter:{attending: true}">
-				<div ng-show="guest.email" ng-bind="guest.email"></div>
-				<div ng-bind="guest.name"></div>
-
-				<nav>
-					<ul>
-						<li><a href="#" ng-click="module.setAttending(guest, false)">count them out</a></li>
-						<li ng-show="guest.email"><a href="#" ng-click="module.emailInvite(guest)">resend invitaiton</a></li>
-						<li ng-show="module.organiser"><a href="#" ng-click="module.renegeInvite(guest)">delete</a></li>
-					</ul>
-				</nav>
-
-			</li>
-		</ul>
+	<div class="section">
+		<form ng-submit="module.guestAdd()">
+			<fieldset>
+				<div class="row">
+					<div class="col-xs-10">
+						<input type="text" class="form-control" ng-model="module.data.new.guest.name">
+					</div>
+					<div class="col-xs-2">
+						<button class="btn btn-block btn-primary">add</button>
+					</div>
+				</div>
+			</fieldset>
+		</form>
 	</div>
-	<div>
-		<header>Invited people who have not confirmed</header>
-		<ul>
-			<li ng-repeat="guest in module.data.event.guests | filter:{attending: false}">
-				<div ng-show="guest.email" ng-bind="guest.email"></div>
-				<div ng-bind="guest.name"></div>
 
-				<nav>
-					<ul>
-						<li><a href="#" ng-click="module.setAttending(guest, false)">count them in</a></li>
-						<li ng-show="guest.email"><a href="#" ng-click="module.emailInvite(guest)">resend invitaiton</a></li>
-						<li ng-show="module.organiser"><a href="#" ng-click="module.renegeInvite(guest)">delete</a></li>
-					</ul>
-				</nav>
+	<div class="row">
+		<div class="col-sm-6">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>People who are in</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="guest in module.data.event.guests | filter:{attending: true}">
+						<td class="text-center">
+							<div ng-show="guest.email">
+								<img src="http://www.gravatar.com/avatar/{{md5(guest.email)}}" class="img-circle">
+							</div>
+							<div ng-bind="guest.name"></div>
 
-			</li>
-		</ul>
+							<nav class="hide">
+								<ul>
+									<li><a href="#" ng-click="module.setAttending(guest, false)">count them out</a></li>
+									<li ng-show="guest.email"><a href="#" ng-click="module.emailInvite(guest)">resend invitaiton</a></li>
+									<li ng-show="module.organiser"><a href="#" ng-click="module.renegeInvite(guest)">delete</a></li>
+								</ul>
+							</nav>
+
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-sm-6">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Invited people who have not confirmed</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="guest in module.data.event.guests | filter:{attending: false}">
+						<td class="text-center">
+							<div ng-show="guest.email">
+								<img src="http://www.gravatar.com/avatar/{{md5(guest.email)}}" class="img-circle">
+							</div>
+							<div ng-bind="guest.name"></div>
+
+							<nav class="hide">
+								<ul>
+									<li><a href="#" ng-click="module.setAttending(guest, false)">count them out</a></li>
+									<li ng-show="guest.email"><a href="#" ng-click="module.emailInvite(guest)">resend invitaiton</a></li>
+									<li ng-show="module.organiser"><a href="#" ng-click="module.renegeInvite(guest)">delete</a></li>
+								</ul>
+							</nav>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
-</div>
 
-<footer ng-show="module.data.eventcount.total > 0">
-	{{module.data.eventcount.total}} events created and counting
-</footer>
+	<footer ng-include="'/partials/includes/eventcount.html'"></footer>
+
+</div>
