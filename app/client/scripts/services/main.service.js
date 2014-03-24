@@ -33,7 +33,7 @@ module.exports = cmi.class.service.extend(function () {}).methods({
 		}
 
 		self.data.event.save(function (_error, _res) {
-			location.href = '/event/' + self.data.event.hash;
+			location.href = '/event/' + self.data.event.id;
 		});
 
 	},

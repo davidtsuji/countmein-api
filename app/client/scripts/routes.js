@@ -16,7 +16,7 @@ module.exports = function ($routeProvider, $locationProvider) {
 
 	$routeProvider
 
-	.when('/event/:hash', {
+	.when('/event/:id', {
 		templateUrl: '/partials/event.html',
 		controller: controller('eventService')
 	})
