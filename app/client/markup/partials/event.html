@@ -1,1 +1,69 @@
-<h1 ng-bind="module.data.event.name"></h1>
+<div ng-include="'/partials/nav.html'"></div>
+
+<div>
+	<h1>
+		{{module.data.event.name}}
+		<small ng-show="module.data.event.organiserName" ng-bind="module.data.event.organiserName"></small>
+	</h1>
+	<aside>
+		<div>
+			<span ng-show="module.data.event.date">on the {{module.data.event.date}}</span>
+			<span ng-show="module.data.event.time">at {{module.data.event.time}}</span>
+		</div>
+		<div>
+			<span ng-show="module.data.event.where" ng-bind="module.data.event.where"></span>
+		</div>
+	</aside>
+</div>
+
+<div>
+	<form ng-submit="module.guestAdd()">
+		<fieldset>
+			<input type="text" ng-model="module.data.new.guest.name">
+			<button>add</button>
+		</fieldset>
+	</form>
+</div>
+
+<div>
+	<div>
+		<header>People who are in</header>
+		<ul>
+			<li ng-repeat="guest in module.data.event.guests | filter:{attending: true}">
+				<div ng-show="guest.email" ng-bind="guest.email"></div>
+				<div ng-bind="guest.name"></div>
+
+				<nav>
+					<ul>
+						<li><a href="#" ng-click="module.setAttending(guest, false)">count them out</a></li>
+						<li ng-show="guest.email"><a href="#" ng-click="module.emailInvite(guest)">resend invitaiton</a></li>
+						<li ng-show="module.organiser"><a href="#" ng-click="module.renegeInvite(guest)">delete</a></li>
+					</ul>
+				</nav>
+
+			</li>
+		</ul>
+	</div>
+	<div>
+		<header>Invited people who have not confirmed</header>
+		<ul>
+			<li ng-repeat="guest in module.data.event.guests | filter:{attending: false}">
+				<div ng-show="guest.email" ng-bind="guest.email"></div>
+				<div ng-bind="guest.name"></div>
+
+				<nav>
+					<ul>
+						<li><a href="#" ng-click="module.setAttending(guest, false)">count them in</a></li>
+						<li ng-show="guest.email"><a href="#" ng-click="module.emailInvite(guest)">resend invitaiton</a></li>
+						<li ng-show="module.organiser"><a href="#" ng-click="module.renegeInvite(guest)">delete</a></li>
+					</ul>
+				</nav>
+
+			</li>
+		</ul>
+	</div>
+</div>
+
+<footer ng-show="module.data.eventcount.total > 0">
+	{{module.data.eventcount.total}} events created and counting
+</footer>
