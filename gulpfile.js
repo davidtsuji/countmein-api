@@ -71,12 +71,9 @@ gulp.task('minifyLibsScripts', ['scriptsLib'], function () {
 		.pipe(gulp.dest('./public/scripts'));
 });
 
-gulp.task('test', ['minify'], function () {
-	gulp.src('')
-		.pipe(shell([
-			'npm test'
-		]));
-});
+gulp.task('test', ['build'], shell.task([
+	'npm test'
+]));
 
 gulp.task('server', function () {
 	cluster.setupMaster({
@@ -102,7 +99,6 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', ['build', 'minify', 'test']);
-gulp.task('notests', ['build', 'minify']);
 gulp.task('scripts', ['scriptsApp', 'scriptsLib']);
 gulp.task('build', ['styles', 'scripts', 'markup']);
 gulp.task('run', ['build', 'server', 'watch']);
