@@ -3,22 +3,27 @@ var gulp = require('gulp'),
 	less = require('gulp-less'),
 	concat = require('gulp-concat'),
 	browserify = require('gulp-browserify'),
-	livereload = require('gulp-livereload'),
 	cluster = require('cluster'),
 	rename = require('gulp-rename'),
 	shell = require('gulp-shell'),
 	path = require('path');
 
-var worker;
+var worker, livereloadServer;
+
+var livereload = function (_file) {
+	return function (_path) {
+		if (livereloadServer) livereloadServer.changed(_file);
+	}
+}
 
 gulp.task('styles', function () {
-	gulp.src('./app/client/styles/index.less')
+	return gulp.src('./app/client/styles/index.less')
 		.pipe(less({
 			paths: [path.join(__dirname, 'less', 'includes')]
 		}))
 		.pipe(rename('app.css'))
 		.pipe(gulp.dest('./public/styles'))
-		// .pipe(livereload());
+		.on('end', livereload('.css'));
 });
 
 gulp.task('scriptsApp', function () {
@@ -29,7 +34,7 @@ gulp.task('scriptsApp', function () {
 		}))
 		.pipe(rename('app.js'))
 		.pipe(gulp.dest('./public/scripts'))
-		// .pipe(livereload());
+		.on('end', livereload('.js'));
 });
 
 gulp.task('scriptsLib', function () {
@@ -43,15 +48,13 @@ gulp.task('scriptsLib', function () {
 		'./bower_components/underscore/underscore.js'
 	])
 		.pipe(concat('libs.js'))
-		.pipe(gulp.dest('./public/scripts'))
-		// .pipe(livereload());
+		.pipe(gulp.dest('./public/scripts'));
 });
 
 gulp.task('markup', function () {
 	gulp.src(['./app/client/markup/**/*.*'])
 		.pipe(gulp.dest('./public/'))
-		// .pipe(livereload());
-
+		.on('end', livereload('.html'));
 });
 
 gulp.task('minifyAppScripts', ['scriptsApp'], function () {
@@ -87,8 +90,11 @@ gulp.task('server', function () {
 });
 
 gulp.task('watch', function () {
+
+	livereloadServer = require('gulp-livereload')();
+
 	gulp.watch(['./app/client/styles/**/*.less'], ['styles']);
-	gulp.watch(['./app/client/scripts/**/*'], ['scripts']);
+	gulp.watch(['./app/client/scripts/**/*'], ['scriptsApp']);
 	gulp.watch(['./app/client/markup/**/*.html'], ['markup']);
 	gulp.watch(['./test/**/*'], ['build']);
 	gulp.watch(['./server.js'], ['server']);
