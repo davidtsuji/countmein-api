@@ -4,7 +4,6 @@ var gulp = require('gulp'),
 	concat = require('gulp-concat'),
 	browserify = require('gulp-browserify'),
 	livereload = require('gulp-livereload'),
-	clean = require('gulp-clean'),
 	cluster = require('cluster'),
 	rename = require('gulp-rename'),
 	shell = require('gulp-shell'),
@@ -85,13 +84,6 @@ gulp.task('server', function () {
 		worker.kill();
 	}
 	worker = cluster.fork();
-});
-
-gulp.task('clean', function () {
-	gulp.src('')
-		.pipe(shell([
-			'make clean'
-		]));
 });
 
 gulp.task('watch', function () {
