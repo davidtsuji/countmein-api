@@ -10,7 +10,6 @@ echo "Checking out to $DIR"
 GIT_WORK_TREE=$DIR git checkout -f
  
 cd $DIR
-npm install
 make
 echo "Done installs"
  

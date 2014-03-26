@@ -28,6 +28,9 @@ sudo add-apt-repository -y ppa:chris-lea/node.js
 sudo apt-get update
 sudo apt-get install -y nodejs
 
+# For phantomjs (https://github.com/ariya/phantomjs/issues/10904)
+sudo apt-get install -y libfontconfig
+
 sudo npm install -g forever express
 
 cd /tmp
