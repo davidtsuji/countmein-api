@@ -2,11 +2,11 @@
 	"name": "countmein",
 	"version": "0.0.0",
 	"description": "",
-	"main": "server.js",
+	"main": "app/server/index.js",
 	"scripts": {
 		"pretest": "./node_modules/.bin/mocha-phantomjs -p ./node_modules/.bin/phantomjs testClient/index.html",
 		"test": "./node_modules/.bin/mocha",
-		"start": "node server.js"
+		"start": "node app/server/index.js"
 	},
 	"author": "David Tsuji",
 	"contributors": [{

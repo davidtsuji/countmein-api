@@ -77,7 +77,7 @@ gulp.task('test', ['build'], shell.task([
 
 gulp.task('server', function () {
 	cluster.setupMaster({
-		exec: "./server.js"
+		exec: "./app/server/index.js"
 	});
 
 	if (worker) {
@@ -94,7 +94,7 @@ gulp.task('watch', function () {
 	gulp.watch(['./app/client/scripts/**/*'], ['scriptsApp']);
 	gulp.watch(['./app/client/markup/**/*.html'], ['markup']);
 	gulp.watch(['./test/**/*'], ['build']);
-	gulp.watch(['./server.js'], ['server']);
+	gulp.watch(['./app/server/**/*'], ['server']);
 	gulp.watch(['./gulpfile.js'], ['default']);
 });
 
