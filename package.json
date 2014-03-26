@@ -40,7 +40,7 @@
 	"dependencies": {
 		"klass": "^1.4.0",
 		"express": "^3.4.8",
-		"sg-model": "0.0.4",
+		"sg-model": "0.0.x",
 		"sc-guid": "0.0.4",
 		"sg-styles": "0.0.1",
 		"MD5": "^1.2.0"
