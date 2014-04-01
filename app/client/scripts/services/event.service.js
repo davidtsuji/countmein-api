@@ -12,12 +12,11 @@ module.exports = cmi.class.service.extend(function () {}).methods({
 
 		self.data.event = new cmi.model.event().model;
 		self.data.eventcount = new cmi.model.eventcount().model;
-		self.data.new.guest = new cmi.model.guest().model;
 
 		async.waterfall([
 
 			function (_callback) {
-				self.data.event.get({
+				self.data.event.$get({
 					id: cmi.scope.$routeParams.id
 				}, function (_error) {
 					_callback(_error);
@@ -25,20 +24,19 @@ module.exports = cmi.class.service.extend(function () {}).methods({
 			},
 
 			function (_callback) {
-				self.data.eventcount.get(function (_error) {
+				self.data.eventcount.$get(function (_error) {
 					_callback(_error);
 				});
 			}
 
 		], function (_error) {
+			if (_error) throw _error;
 			self.initialised = true;
 		});
 
 	},
 
-	guestAdd: function () {
-		console.log();
-	},
+	guestAdd: function () {},
 
 	data: {
 		new: {}

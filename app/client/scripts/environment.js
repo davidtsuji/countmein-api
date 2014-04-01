@@ -8,7 +8,8 @@ case /countmein.io/.test(window.location.hostname):
 
 default:
 	cmi.config.environment = 'local';
-	cmi.config.api.base = 'http://countmein.apiary-mock.com';
+	cmi.config.api.base = 'http://localhost:3050';
+	// cmi.config.api.base = 'http://countmein.apiary-mock.com';
 	break;
 
 }

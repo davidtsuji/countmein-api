@@ -25,3 +25,7 @@ cmi.model = {};
 cmi.model.event = require('./models/event.model');
 cmi.model.eventcount = require('./models/eventcount.model');
 cmi.model.guest = require('./models/guest.model');
+
+/* Middleware */
+cmi.modules.model.use('adapter', require('./middleware/model.adapter.schema'));
+cmi.modules.model.use('adapter', require('moldy-adapter-ajax'));
