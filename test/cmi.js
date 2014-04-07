@@ -1,5 +1,7 @@
-var should = require('should');
+// var should = require('should');
 
 describe('countmein.io', function () {
-	it('is awesome', function () {});
+	it('is awesome', function () {
+		// ''.should.equal('-');
+	});
 });

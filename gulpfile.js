@@ -1,12 +1,14 @@
 var gulp = require('gulp'),
-	compress = require('gulp-uglify'),
-	less = require('gulp-less'),
-	concat = require('gulp-concat'),
 	browserify = require('gulp-browserify'),
 	cluster = require('cluster'),
+	compress = require('gulp-uglify'),
+	concat = require('gulp-concat'),
+	jshint = require('gulp-jshint'),
+	jshintReporter = require("jshint-stylish"),
+	less = require('gulp-less'),
+	path = require('path'),
 	rename = require('gulp-rename'),
-	shell = require('gulp-shell'),
-	path = require('path');
+	shell = require('gulp-shell');
 
 var worker, livereloadServer;
 
@@ -15,6 +17,12 @@ var livereload = function (_file) {
 		if (livereloadServer) livereloadServer.changed(_file);
 	}
 }
+
+gulp.task("jshint", function () {
+	return gulp.src(["./app/client/scripts/**/*.js", "./app/server/**/*.js", "test/**/*.js"])
+		.pipe(jshint())
+		.pipe(jshint.reporter(jshintReporter));
+});
 
 gulp.task('styles', function () {
 	return gulp.src('./app/client/styles/index.less')
@@ -26,10 +34,10 @@ gulp.task('styles', function () {
 		.on('end', livereload('.css'));
 });
 
-gulp.task('scriptsApp', function () {
+gulp.task('scriptsApp', ['jshint'], function () {
 	return gulp.src(['./app/client/scripts/index.js'])
 		.pipe(browserify({
-			standalone: 'cmi',
+			standalone: 'app',
 			debug: true
 		}))
 		.pipe(rename('app.js'))
@@ -37,14 +45,16 @@ gulp.task('scriptsApp', function () {
 		.on('end', livereload('.js'));
 });
 
-gulp.task('scriptsLib', function () {
+gulp.task('scriptsLib', ['jshint'], function () {
 	return gulp.src([
 		'./bower_components/jquery/dist/jquery.js',
 		'./bower_components/angular/angular.js',
 		'./bower_components/angular-route/angular-route.js',
 		'./bower_components/async/lib/async.js',
+		'./bower_components/bootstrap/dist/js/bootstrap.js',
 		'./bower_components/moment/moment.js',
 		'./bower_components/numeral/numeral.js',
+		'./bower_components/store-js/store.js',
 		'./bower_components/underscore/underscore.js'
 	])
 		.pipe(concat('libs.js'))
@@ -73,7 +83,9 @@ gulp.task('minifyLibsScripts', ['scriptsLib'], function () {
 
 gulp.task('test', ['build'], shell.task([
 	'npm test'
-]));
+], {
+	ignoreErrors: true
+}));
 
 gulp.task('server', function () {
 	cluster.setupMaster({
@@ -93,7 +105,7 @@ gulp.task('watch', function () {
 	gulp.watch(['./app/client/styles/**/*.less'], ['styles']);
 	gulp.watch(['./app/client/scripts/**/*'], ['scriptsApp']);
 	gulp.watch(['./app/client/markup/**/*.html'], ['markup']);
-	gulp.watch(['./test/**/*'], ['build']);
+	gulp.watch(['./test/**/*', './testClient/**/*'], ['test']);
 	gulp.watch(['./app/server/**/*'], ['server']);
 	gulp.watch(['./gulpfile.js'], ['default']);
 });
@@ -101,5 +113,5 @@ gulp.task('watch', function () {
 gulp.task('default', ['build', 'minify', 'test']);
 gulp.task('scripts', ['scriptsApp', 'scriptsLib']);
 gulp.task('build', ['styles', 'scripts', 'markup']);
-gulp.task('run', ['build', 'server', 'watch']);
+gulp.task('run', ['default', 'server', 'watch']);
 gulp.task('minify', ['minifyAppScripts', 'minifyLibsScripts']);

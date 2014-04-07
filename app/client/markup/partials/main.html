@@ -31,10 +31,18 @@
 		</fieldset>
 	</form>
 
-	<div class="container hide">
+	<div class="container" ng-show="module.data.me.events.length">
 		<h3>Your recent events</h3>
 		<ul>
-			<li>... load recent events here</li>
+			<li ng-repeat="event in module.data.me.events">
+				<a ng-href="/event/{{event.id}}">
+					{{event.name}}
+					<span class="badge-group">
+						<span class="badge">{{_.where(event.guests,{attending:true}).length}}</span>
+						<span class="badge">{{event.guests.length}}</span>
+					</span>
+				</a>
+			</li>
 		</ul>
 	</div>
 

@@ -1,5 +1,5 @@
-var cmi = require('../cmi');
+var app = require('../app');
 
 exports.apply = function () {
-	cmi.scope.$apply();
+	app.scope.$apply();
 };

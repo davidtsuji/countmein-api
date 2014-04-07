@@ -14,6 +14,8 @@ describe('Libs', function () {
 	}, {
 		name: 'numeral'
 	}, {
+		name: 'store'
+	}, {
 		name: 'underscore',
 		eval: '_'
 	}];

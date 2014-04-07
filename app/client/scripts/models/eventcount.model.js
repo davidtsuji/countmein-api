@@ -1,11 +1,10 @@
-var cmi = require('../cmi');
+var app = require('../app');
 
-module.exports = cmi.class.model.extend(function () {
+module.exports = app.class.moldy.extend({
 
-	this.model = new cmi.modules.model('eventcount', {
-		baseUrl: cmi.config.api.base
-	});
-
-	this.addListeners();
+	init: function () {
+		this.name = 'eventcount';
+		this._super();
+	}
 
 });

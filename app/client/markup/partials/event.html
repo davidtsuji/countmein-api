@@ -23,10 +23,10 @@
 			<fieldset>
 				<div class="row">
 					<div class="col-xs-10">
-						<input type="text" class="form-control" ng-model="module.data.new.guest.name" disabled="">
+						<input type="text" class="form-control" ng-model="module.data.new.guestName" placeholder="Type guest name" autofocus>
 					</div>
 					<div class="col-xs-2">
-						<button class="btn btn-block btn-primary" disabled="">add</button>
+						<button class="btn btn-block btn-primary">add guest</button>
 					</div>
 				</div>
 			</fieldset>
@@ -42,21 +42,19 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="guest in module.data.event.guests | filter:{attending: true}">
+					<tr ng-repeat="guest in module.data.event.guests | filter:{attending: true} | orderBy:['sort', 'name']">
 						<td class="text-center">
 							<div ng-show="guest.email">
 								<img src="http://www.gravatar.com/avatar/{{md5(guest.email)}}" class="img-circle">
 							</div>
 							<div ng-bind="guest.name"></div>
-
-							<nav class="hide">
+							<nav>
 								<ul>
-									<li><a href="#" ng-click="module.setAttending(guest, false)">count them out</a></li>
+									<li><a href="#" ng-click="module.guestAttendToggle(guest)">count them out</a></li>
 									<li ng-show="guest.email"><a href="#" ng-click="module.emailInvite(guest)">resend invitaiton</a></li>
 									<li ng-show="module.organiser"><a href="#" ng-click="module.renegeInvite(guest)">delete</a></li>
 								</ul>
 							</nav>
-
 						</td>
 					</tr>
 				</tbody>
@@ -70,16 +68,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="guest in module.data.event.guests | filter:{attending: false}">
+					<tr ng-repeat="guest in module.data.event.guests | filter:{attending: false} | orderBy:['sort', 'name']">
 						<td class="text-center">
 							<div ng-show="guest.email">
 								<img src="http://www.gravatar.com/avatar/{{md5(guest.email)}}" class="img-circle">
 							</div>
-							<div ng-bind="guest.name"></div>
-
-							<nav class="hide">
+							<div>{{guest.name}} (<a href="#" ng-click="module.openForEditing('guest', guest)">edit</a>)</div>
+							<nav>
 								<ul>
-									<li><a href="#" ng-click="module.setAttending(guest, false)">count them out</a></li>
+									<li><a href="#" ng-click="module.guestAttendToggle(guest)">count them in</a></li>
 									<li ng-show="guest.email"><a href="#" ng-click="module.emailInvite(guest)">resend invitaiton</a></li>
 									<li ng-show="module.organiser"><a href="#" ng-click="module.renegeInvite(guest)">delete</a></li>
 								</ul>
@@ -94,3 +91,5 @@
 	<footer ng-include="'/partials/includes/eventcount.html'"></footer>
 
 </div>
+
+<ng-include src="'/partials/modals/guest.modal.html'"></ng-include>
