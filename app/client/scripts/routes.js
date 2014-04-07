@@ -1,13 +1,13 @@
-var cmi = require('./cmi');
+var app = require('./app');
 
 var controller = function (_service) {
 	return function () {
-		var module = cmi.module = cmi.scope.module = cmi.scope[_service];
+		var module = app.module = app.scope.module = app.scope[_service];
 
-		module.name = _service;
+		module.service = _service;
 		module.initialised = false;
-		module.scope = cmi.scope;
-		module.init();
+		module.scope = app.scope;
+		module.serviceInit();
 
 	};
 };

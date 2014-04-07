@@ -1,17 +1,17 @@
-var cmi = require('./cmi');
+var app = require('./app');
 
 switch (true) {
 
 case /countmein.io/.test(window.location.hostname):
-	cmi.config.environment = 'prod';
+	app.config.environment = 'prod';
 	break;
 
 default:
-	cmi.config.environment = 'local';
-	cmi.config.api.base = 'http://localhost:3050';
-	// cmi.config.api.base = 'http://countmein.apiary-mock.com';
+	app.config.environment = 'local';
+	app.config.api.base = 'http://localhost:3050';
+	// app.config.api.base = 'http://countmein.apiary-mock.com';
 	break;
 
 }
 
-module.exports = cmi.config.environment;
+module.exports = app.config.environment;

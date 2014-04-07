@@ -1,10 +1,12 @@
 exports = module.exports = {
 	async: async,
+	emitter: require('emitter-component'),
+	extendify: require('sc-extendify'),
 	guid: require('sc-guid'),
 	hasKey: require('sc-haskey'),
 	is: require('sc-is'),
-	klass: require('klass'),
 	md5: require('MD5'),
-	model: require('moldy'),
+	merge: require('sc-merge'),
+	moldy: require('moldy'),
 	superagent: require('superagent')
 };

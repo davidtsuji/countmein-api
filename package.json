@@ -1,53 +1,60 @@
 {
-	"name": "countmein",
-	"version": "0.0.0",
-	"description": "",
-	"main": "app/server/index.js",
-	"scripts": {
-		"pretest": "./node_modules/.bin/mocha-phantomjs -p ./node_modules/.bin/phantomjs testClient/index.html",
-		"test": "./node_modules/.bin/mocha",
-		"start": "node app/server/index.js"
-	},
-	"author": "David Tsuji",
-	"contributors": [{
-		"name": "Glen Arrowsmith",
-		"email": "glen.arrowsmith@gmail.com",
-		"url": "http://garrows.com/"
-	}],
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/davidtsuji/countmein.io"
-	},
-	"license": "MIT",
-	"devDependencies": {
-		"browserify": "^3.32.1",
-		"less": "^1.7.0",
-		"bower": "^1.3.1",
-		"forever": "^0.10.11",
-		"gulp-concat": "^2.2.0",
-		"gulp-uglify": "^0.2.1",
-		"gulp": "^3.5.6",
-		"gulp-less": "^1.2.3",
-		"gulp-browserify": "^0.5.0",
-		"gulp-livereload": "^1.2.0",
-		"gulp-rename": "^1.2.0",
-		"mocha-phantomjs": "^3.3.2",
-		"phantomjs": "^1.9.7-1",
-		"should": "^3.1.4",
-		"mocha": "^1.18.2",
-		"gulp-shell": "^0.2.4"
-	},
-	"dependencies": {
-		"klass": "^1.4.0",
-		"express": "^3.4.8",
-		"sc-guid": "0.0.4",
-		"sg-styles": "0.0.1",
-		"MD5": "^1.2.0",
-		"async": "^0.4.0",
-		"superagent": "^0.17.0",
-		"sc-is": "0.0.3",
-		"sc-haskey": "0.0.2",
-		"moldy": "0.0.x",
-		"moldy-adapter-ajax": "0.0.x"
-	}
+  "name": "countmein",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app/server/index.js",
+  "scripts": {
+    "postinstall": "bower install --allow-root --config.interactive=false && gulp",
+    "pretest": "mocha-phantomjs -p ./node_modules/.bin/phantomjs testClient/index.html",
+    "test": "mocha",
+    "start": "node app/server/index.js"
+  },
+  "author": "David Tsuji",
+  "contributors": [
+    {
+      "name": "Glen Arrowsmith",
+      "email": "glen.arrowsmith@gmail.com",
+      "url": "http://garrows.com/"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidtsuji/countmein.io"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^3.32.1",
+    "less": "^1.7.0",
+    "bower": "^1.3.1",
+    "forever": "^0.10.11",
+    "gulp-concat": "^2.2.0",
+    "gulp-uglify": "^0.2.1",
+    "gulp": "^3.5.6",
+    "gulp-less": "^1.2.3",
+    "gulp-browserify": "^0.5.0",
+    "gulp-livereload": "^1.2.0",
+    "gulp-rename": "^1.2.0",
+    "mocha-phantomjs": "^3.3.2",
+    "phantomjs": "^1.9.7-1",
+    "should": "^3.1.4",
+    "mocha": "^1.18.2",
+    "gulp-shell": "^0.2.4",
+    "jshint-stylish": "^0.1.5",
+    "gulp-jshint": "^1.5.3"
+  },
+  "dependencies": {
+    "MD5": "^1.2.0",
+    "async": "^0.4.0",
+    "emitter-component": "^1.1.1",
+    "express": "^3.4.8",
+    "moldy": "0.0.25",
+    "moldy-ajax-adapter": "0.0.6",
+    "sc-extendify": "0.0.0",
+    "sc-guid": "0.0.4",
+    "sc-haskey": "0.0.2",
+    "sc-is": "0.0.3",
+    "sc-merge": "0.0.3",
+    "sg-styles": "0.0.1",
+    "superagent": "^0.17.0"
+  }
 }

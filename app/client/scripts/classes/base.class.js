@@ -1,3 +1,3 @@
-var cmi = require('../cmi');
+var app = require('../app');
 
-module.exports = cmi.modules.klass(function () {});
+module.exports = app.modules.extendify();

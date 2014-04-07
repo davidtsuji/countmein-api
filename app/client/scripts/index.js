@@ -1,20 +1,22 @@
-var cmi = require('./cmi');
+var app = require('./app');
 
-exports = module.exports = cmi;
-angular.module('cmi', ['ngRoute']).config(cmi.routes);
+exports = module.exports = app;
+angular.module('cmi', ['ngRoute']).config(app.routes);
 
 exports.controller = function ($scope, $route, $routeParams, $location) {
-	var scope = cmi.scope = exports.scope = $scope;
+	var scope = app.scope = exports.scope = $scope;
 
+	scope.$location = $location;
 	scope.$route = $route;
 	scope.$routeParams = $routeParams;
 
 	/* Dependencies */
+	scope.$ = jQuery;
 	scope.numeral = numeral;
-	scope.md5 = cmi.modules.md5;
+	scope.md5 = app.modules.md5;
 
-	Object.keys(cmi.service).forEach(function (_key) {
-		scope[_key + 'Service'] = new cmi.service[_key]();
+	Object.keys(app.service).forEach(function (_key) {
+		scope[_key + 'Service'] = new app.service[_key]();
 	});
 
 };
